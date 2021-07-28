@@ -44,7 +44,7 @@
                 </div>
 
                 <div style="display: inline-block; width: 49%; border-left: 1px solid lightgray; box-sizing: border-box; vertical-align: top; text-align: center; ">
-                    <input type="date" name="due_date" required>
+                    <input id="due-date-input" type="date" name="due_date"  required>
                     
                 </div>
 
@@ -69,10 +69,14 @@
                 <% for(let t of todo_list) { %>
                 
                 <div style="border-bottom: 1px solid lightgray;">
-                    <input type="checkbox" value="<%= t.desc %>" name="desc" >
+                    <input type="checkbox" value="<%= t._id %>" name="_id" >
                     <span><%= t.desc %></span>
                     <br>
-                    <span><%= t.due_date %></span>
+                    <span>
+                        <%= t.due_date.toString().substring(4,7)%>
+                        <%= t.due_date.getDate()%>,
+                        <%= t.due_date.getFullYear()%>
+                    </span>
                     <br>
                     <span><%= t.category %></span>
 
@@ -96,6 +100,24 @@
         function myFunction() {
             document.getElementById("delete-form").submit();
         }
+
+        function getTodaysDate() {
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1;
+            let yyyy = today.getFullYear();
+
+            if(dd < 10) {
+                dd  = '0' + dd;
+            }
+            if(mm < 10) {
+                mm = '0' + mm;
+            }
+
+            return yyyy + '-' + mm + '-' + dd;
+        }
+
+        document.getElementById("due-date-input").setAttribute("min", getTodaysDate());
     </script>
 
 
