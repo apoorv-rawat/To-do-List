@@ -32,6 +32,7 @@ app.use(express.urlencoded());
 //     }
 // ];
 
+
 // get number of documents in DB
 function isEmptyCheck() {
     Todoitem.countDocuments({}, function (err, count) {

@@ -5,58 +5,198 @@
         <%= title %>
     </title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" 
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        input:focus {
-            background-color: yellow;
+
+        body {
+            color: hsl(231deg 21% 45%);
         }
+
+        label {
+            text-transform: uppercase;
+        }
+
+        .strike-through {
+            text-decoration: line-through;
+            color: lightgray;
+        }
+
+        #main-container {
+            width: 60%; 
+            margin: auto; 
+            margin-top: 5%;
+        }
+
+        .desc-container {
+            padding: 20px; 
+            border-top: 1px solid lightgrey;
+        }
+
+        #description {
+            border: none; 
+            outline: none; 
+            padding: 0; 
+            margin-top: 5px;
+        }
+
+        #dateAndCategory {
+            border-top: 1px solid lightgrey; 
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        #dateAndCategory select {
+            margin-top: 1rem;
+            width: 100%; 
+            border: none; 
+            padding: 0;
+        }
+
+        #leftD { 
+            padding: 20px; 
+            width: 50%; 
+            box-sizing: border-box;
+        }
+
+        #rightD { 
+            padding: 20px; 
+            width: 50%; 
+            border-left: 1px solid lightgray; 
+            box-sizing: border-box;
+        }
+
+        #rightD input {
+            display: block; 
+            margin-top: 1rem;
+        }
+
+        #buttonsMain {
+            display: flex;
+            justify-content: center; 
+            border-bottom: 1px solid lightgray; 
+            border-top: 1px solid lightgray;
+            padding-top: 30px; 
+            padding-bottom: 30px;
+        } 
+
+        #buttonsMain button[type="submit"] {
+            color: white; 
+            height: 50px; 
+            width: 100px; 
+            border-radius: 5px; 
+            margin-right: 20px; 
+            border: none; 
+            background-color: hsl(300deg 1% 27%);
+        }
+
+        #buttonsMain button[type="button"] {
+            color: white; 
+            height: 50px; 
+            width: 100px; 
+            border-radius: 5px; 
+            border: none; 
+            background-color: hsl(7deg 84% 53%);
+        }
+
+        #tasks-container {
+            padding-left: 5%; 
+            padding-right: 5%;
+        }
+
+        #taskn {
+            display: flex; 
+            border-bottom: 1px solid lightgray; 
+            justify-content: space-between;
+            padding-bottom: 20px; 
+            padding-top: 20px;
+        }
+        
+        .category-tile  {
+            height: 50px; 
+            width: 100px; 
+            border-radius: 5px; 
+            margin-right: 20px; 
+            border: none;
+            text-align: center; 
+            line-height: 50px;
+            color: white;
+        } 
+
+        #taskn span.disp-blk {
+            margin-left: 20px;  
+            margin-top: 0.75rem;
+        }
+             
+        .item-details {
+            margin-left: 20px;
+        }
+
+        input[type="checkbox"] {
+            margin: 0; 
+        } 
+
+        #span-desc {
+            font-size: 1.2rem; 
+            margin-left: 4px;
+        } 
+        
+        /* general help classes */
+        .disp-blk {
+            display: block;
+        }
+
     </style>
+
 </head>
 
-<body style="width: 60%; border: solid red 1px; margin: auto; margin-top: 5%;">
+<body> 
 
-    <h1 style="text-align: center;">TODO App</h1>
+    <div id="main-container">
+
+    <h1 style="text-align: center; ">TODO App</h1>
 
     <main>
 
         <form id="create-form" action="/create-todo" method="POST">
 
 
-            <div style="padding: 20px; border-top: 1px solid lightgrey;">
-                <label for="description" style="display: block;">Description</label>
-                <input id="description" name="desc" style="border: none; outline: none; padding: 0; margin-top: 5px;"
-                    placeholder="What do you need to do?" required>
+            <div class="desc-container">
+                <label for="description" class="disp-blk">Description</label>
+                <input id="description" name="desc" placeholder="What do you need to do?" required>
             </div>
 
-            <div id="checkDate" style=" border-top: 1px solid lightgrey; box-sizing: border-box;">
+            <div id="dateAndCategory">
 
-                <div style="display: inline-block; width: 50%; box-sizing: border-box;">
-                    <label for="priority" style="display: block;">Category</label>
-                    <select id="priority" name="category" style="padding-left: 20px; border: none; outline: none; padding: 0; margin-top: 5px;"
-                        placeholder="What do you need to do?" required>
-
-                        <option style="font-style: italic;" value="" disabled selected>Choose a category</option>
-                        <option style="font-style: italic; margin-left: 10px;" value="personal">Personal</option>
-                        <option value="work">Work</option>
-                        <option value="school">School</option>
-                        <option value="cleaning">Cleaning</option>
-                        <option value="other">Other</option>
+                <div id="leftD">
+                    <label for="priority">Category</label>
+                    <select id="priority" name="category" required >
+                        <option value="" disabled selected>Choose a category</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="School">School</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
 
-                <div style="display: inline-block; width: 49%; border-left: 1px solid lightgray; box-sizing: border-box; vertical-align: top; text-align: center; ">
-                    <input id="due-date-input" type="date" name="due_date"  required>
-                    
+                <div id="rightD">
+                    <label for="due-date-input">Due date</label>
+                    <input id="due-date-input" type="date" name="due_date" required>
                 </div>
-
 
             </div>
 
-            <div id="buttonsMain" style="display: flex; justify-content: center; 
-            border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;
-            padding-top: 30px; padding-bottom: 30px;">
+            <div id="buttonsMain">
                 
-                <button type="submit" style="height: 50px; width: 100px; border-radius: 5px; margin-right: 20px; border: none; background-color: darkgray">Add task</button>
-                <button type="button"  onclick="myFunction()" style="height: 50px; width: 100px; border-radius: 5px; border: none; background-color: orange  ;">Delete task</button>
+                <button type="submit">
+                    <i class="fas fa-plus"></i> Add task
+                </button>
+                
+                <button type="button" onclick="submitForm()">
+                    <i class="far fa-trash-alt"></i> Delete task
+                </button>
 
             </div>
 
@@ -68,28 +208,35 @@
 
                 <% for(let t of todo_list) { %>
                 
-                <div style="border-bottom: 1px solid lightgray;">
-                    <input type="checkbox" value="<%= t._id %>" name="_id" >
-                    <span><%= t.desc %></span>
-                    <br>
-                    <span>
-                        <%= t.due_date.toString().substring(4,7)%>
-                        <%= t.due_date.getDate()%>,
-                        <%= t.due_date.getFullYear()%>
-                    </span>
-                    <br>
-                    <span><%= t.category %></span>
+                <div id="taskn">
 
-                    
+                    <div class="item-details">
+                        <input type="checkbox" value="<%= t._id %>" name="_id" onchange="toggleCheckbox(this)" >
+                        
+                        <span id="span-desc">
+                            <%= t.desc %>
+                        </span>
+                        
+                        <span class="disp-blk">
+                            <i class="far fa-calendar-alt"></i>
+                            <%= t.due_date.toString().substring(4,7)%>
+                            <%= t.due_date.getDate()%>,
+                            <%= t.due_date.getFullYear()%>
+                        </span>
+                    </div>
+
+                    <div class="category-tile"> 
+                        <%= t.category.toUpperCase() %>
+                    </div>
+
                 </div>
 
                 <% } %>
 
-
             </form>
 
             <% if(is_empty) { %>
-                <p>All tasks completed :) YAY!!</p>
+                <p style="text-align: center;">All tasks completed :) YAY!!</p>
             <% } %>
 
         </div>
@@ -97,7 +244,24 @@
     </main>
 
     <script>
-        function myFunction() {
+
+        // color for each category
+        var colorObj = {
+                    personal : "blue",
+                    cleaning : "red",
+                    work : "pink",
+                    other : "orange",
+                    school : "darkblue"
+                };
+
+        // coloring each category tile
+        var col = document.querySelectorAll(".category-tile");
+        col.forEach(function (ele) {
+            ele.style.backgroundColor = colorObj[ele.innerText.toLowerCase()];
+        });
+
+        // deleting todo item
+        function submitForm() {
             document.getElementById("delete-form").submit();
         }
 
@@ -118,8 +282,34 @@
         }
 
         document.getElementById("due-date-input").setAttribute("min", getTodaysDate());
+
+        // strike through generator
+        function toggleCheckbox(ele) {   
+            ele.parentElement.classList.toggle("strike-through");
+        }
+
+        // gray background on focus
+        (function onFocii(ele) {
+            var eles = document.querySelectorAll("#create-form input , select");
+            
+            eles.forEach(function (elem) {
+
+                elem.addEventListener('focus', (event) => {
+                event.target.parentElement.style.backgroundColor = 'hsl(210deg 17% 93%)';
+                event.target.style.backgroundColor = 'hsl(210deg 17% 93%)';
+                });
+
+                elem.addEventListener('blur', (event) => {
+                event.target.parentElement.style.backgroundColor = 'white';
+                event.target.style.backgroundColor = 'white';
+                });
+
+            });   
+        })();
+        
     </script>
 
+    </div>
 
 </body>
 
