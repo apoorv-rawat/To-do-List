@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+
+    <style>
+        input:focus {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body style="width: 60%; border: solid red 1px; margin: auto; margin-top: 5%;">
+
+    <h1 style="text-align: center;">TODO App</h1>
+
+    <main>
+
+        <form id="create-form" action="/create-todo" method="POST">
+
+
+            <div style="padding: 20px; border-top: 1px solid lightgrey;">
+                <label for="description" style="display: block;">Description</label>
+                <input id="description" name="desc" style="border: none; outline: none; padding: 0; margin-top: 5px;"
+                    placeholder="What do you need to do?" required>
+            </div>
+
+            <div id="checkDate" style=" border-top: 1px solid lightgrey; box-sizing: border-box;">
+
+                <div style="display: inline-block; width: 50%; box-sizing: border-box;">
+                    <label for="priority" style="display: block;">Category</label>
+                    <select id="priority" name="category" style="padding-left: 20px; border: none; outline: none; padding: 0; margin-top: 5px;"
+                        placeholder="What do you need to do?" required>
+
+                        <option style="font-style: italic;" value="" disabled selected>Choose a category</option>
+                        <option style="font-style: italic; margin-left: 10px;" value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="school">School</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div style="display: inline-block; width: 49%; border-left: 1px solid lightgray; box-sizing: border-box; vertical-align: top; text-align: center; ">
+                    <input type="date" name="due_date" required>
+                    
+                </div>
+
+
+            </div>
+
+            <div id="buttonsMain" style="display: flex; justify-content: center; 
+            border-bottom: 1px solid lightgray; border-top: 1px solid lightgray;
+            padding-top: 30px; padding-bottom: 30px;">
+                
+                <button type="submit" style="height: 50px; width: 100px; border-radius: 5px; margin-right: 20px; border: none; background-color: darkgray">Add task</button>
+                <button type="button"  onclick="myFunction()" style="height: 50px; width: 100px; border-radius: 5px; border: none; background-color: orange  ;">Delete task</button>
+
+            </div>
+
+        </form>
+
+        <div id="tasks-container">
+            
+            <form id="delete-form" action="/delete-todo" method="POST">
+
+                <% for(let t of todo_list) { %>
+                
+                <div style="border-bottom: 1px solid lightgray;">
+                    <input type="checkbox" value="<%= t.desc %>" name="desc" >
+                    <span><%= t.desc %></span>
+                    <br>
+                    <span><%= t.due_date %></span>
+                    <br>
+                    <span><%= t.category %></span>
+
+                    
+                </div>
+
+                <% } %>
+
+
+            </form>
+
+            <% if(is_empty) { %>
+                <p>All tasks completed :) YAY!!</p>
+            <% } %>
+
+        </div>
+
+    </main>
+
+    <script>
+        function myFunction() {
+            document.getElementById("delete-form").submit();
+        }
+    </script>
+
+
+</body>
+
+</html>
