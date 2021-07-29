@@ -17,21 +17,8 @@ app.set('view engine', 'ejs');
 // middleware for our form
 app.use(express.urlencoded());
 
-// app.set('views', './views');
-
-// var todoList = [
-//     {
-//         desc : "Do Coding!!",
-//         category : "Personal",
-//         due_date : "2022-11-22"
-//     },
-//     {
-//         desc : "Exercise!!",
-//         category : "Personal",
-//         due_date : "2021-05-01"
-//     }
-// ];
-
+// middleware for serving statics
+app.use(express.static('assets'));
 
 // get number of documents in DB
 function isEmptyCheck() {
@@ -44,12 +31,14 @@ function isEmptyCheck() {
     });
     // var isEmptyCheck = () => todoList.length == 0;
 } 
-
 var isEmpty;
-isEmptyCheck();
 
+
+// routes
 
 app.get('/', function (req, res) {
+
+    isEmptyCheck();
 
     // using mongoose - get all documents
     Todoitem.find({}, function (err, todo) {
@@ -104,23 +93,11 @@ app.post('/delete-todo', function (req, res) {
     isEmptyCheck();
     
     return res.redirect('back');
-
-    // if(data === undefined) {
-    //     console.log("Nothing selected");
-    // } else if(!Array.isArray(data) ) {
-    //     let foundIndex = todoList.findIndex(todo => todo.desc == data);
-    //     todoList.splice(foundIndex,1);
-        
-    // } else {
-    //     for (const d of data) {
-    //         let foundIndex = todoList.findIndex(todo => todo.desc == d);
-    //         todoList.splice(foundIndex,1);
-    //     }
-    // }
 });
 
 app.post('/create-todo', function (req, res) {
 
+    // console.log(req.body);
     Todoitem.create(
         req.body
     );
